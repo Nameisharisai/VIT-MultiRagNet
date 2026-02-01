@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clarity | Smoky Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-primary: #100C08;      /* Smoky Black */
+        --bg-container: #1C1C1C;    /* Deep Ash Charcoal */
+        --text-main: #f8fafc;       /* Ghost White */
+        --accent-grey: #B2BEB5;     /* Ash Grey */
+        --accent-ultra: #F59E0B;    /* Ultra Gold */
+        --accent-dim: #708090;      /* Slate Grey */
+        --border-subtle: #2D2D2D;   /* Dark Border */
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-main);
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+      /* Scanline Effect - Enhanced for Upgrade Visuals */
+      body::before {
+        content: " ";
+        display: block;
+        position: fixed;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
+                    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+        z-index: 1000;
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+        opacity: 0.18;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); filter: blur(5px); }
+        to { opacity: 1; transform: translateY(0); filter: blur(0); }
+      }
+      
+      @keyframes neuralPulse {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+      }
+
+      @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+        100% { transform: translate(0); }
+      }
+
+      @keyframes wave {
+        0% { transform: scaleY(1); }
+        50% { transform: scaleY(0.4); }
+        100% { transform: scaleY(1); }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .neural-sync {
+        animation: neuralPulse 2s infinite ease-in-out;
+      }
+
+      /* UI Elements */
+      .card-container {
+        background-color: var(--bg-container);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+      }
+      .card-container:hover {
+        border-color: var(--accent-grey);
+        box-shadow: 0 0 25px rgba(178, 190, 181, 0.05);
+      }
+      
+      .ultra-card:hover {
+        border-color: var(--accent-ultra);
+        box-shadow: 0 0 25px rgba(245, 158, 11, 0.1);
+      }
+
+      .primary-button {
+        background-color: var(--accent-grey);
+        color: #100C08;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border-radius: 6px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 1rem 2rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+      }
+      .primary-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(178, 190, 181, 0.4);
+        background-color: #ffffff;
+      }
+      
+      .ultra-button {
+        background-color: var(--accent-ultra);
+      }
+      .ultra-button:hover {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+      }
+
+      .primary-button:disabled {
+        opacity: 0.2;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .terminal-input {
+        background: transparent;
+        border-bottom: 2px solid var(--border-subtle);
+        transition: border-color 0.3s;
+      }
+      .terminal-input:focus {
+        border-color: var(--accent-grey);
+        outline: none;
+      }
+      
+      .wave-bar {
+        animation: wave 1.2s ease-in-out infinite;
+        background-color: var(--accent-grey);
+      }
+
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: var(--bg-primary); }
+      ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 10px; }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+        "react/": "https://esm.sh/react@^19.2.4/",
+        "react": "https://esm.sh/react@^19.2.4",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+      }
+    }
+    </script>
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

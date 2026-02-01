@@ -1,0 +1,7 @@
+{
+  "name": "Clarity",
+  "description": "A mindful placement readiness companion focused on thinking-first preparation for DSA, Aptitude, and Interviews.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
